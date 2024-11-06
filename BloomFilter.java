@@ -7,10 +7,7 @@
  *
  ********************************************************************/
 
-import java.util.BitSet;
-import java.util.Random;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.security.SecureRandom;
 import java.lang.Math;
 
@@ -216,15 +213,15 @@ class BloomFilter {
      */
 
     public boolean contains(String s) {
+        for (int i = 0; i < noHashes; i++) {
+            long hashVal = hashCode(s,i);
+            int bitIndex = (int) (hashVal & hashMask);
 
-        // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME AT TOP OF FILE
-        //
-        // HINT: the bitmap is the private class variable 'data', and it is
-        // of type BitSet (Java class BitSet). See Oracle documentation for
-        // this class on available methods. You can also see how method 'add'
-        // in this class uses the object.
-
-        return false;
+            if (!data.get(bitIndex)) {
+                return false;
+            }
+        }
+        return true; // all bits are set
     }
 
 

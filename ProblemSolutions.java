@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Ramiz Hameed / 002
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -31,10 +31,17 @@ class ProblemSolutions {
      */
 
     public boolean isSubset(int list1[], int list2[]) {
+        HashMap<Integer, Boolean> map = new HashMap<>();
+        for (int num : list1) {
+            map.put(num, true); // placeholder boolean value
+        }
 
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
-
-        return false;
+        for (int num : list2) {
+            if (!map.containsKey(num)) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -49,14 +56,24 @@ class ProblemSolutions {
      * @param array - Array of integers
      * @param k     - the kth maximum element
      * @return      - the value in the array which is the kth maximum value
+     *  return kth highest value in given array
      */
 
     public int findKthLargest(int[] array, int k) {
+        PriorityQueue<Integer> min = new PriorityQueue<>(k); // min-heap with k capacity (kth max)
 
-        // ADD YOUR CODE HERE
+        for (int num : array) {
+            if (min.size() < k) {
+                min.add(num);
+            } else if (num > min.peek()) {
+                min.poll(); // remove the smallest in the heap
+                min.add(num); // add the num
+            }
+        }
+        return min.peek();
+        }
 
-        return 0;
-    }
+
 
 
     /**
@@ -73,10 +90,22 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
+        PriorityQueue<Integer> min = new PriorityQueue<>();
 
-        // ADD YOU CODE HERE
+        for (int num : array1) {
+            min.add(num);
+        }
+        for (int num : array2) {
+            min.add(num);
+        }
 
-        return null;
+        int[] sorted = new int[array1.length + array2.length];
+        int index = 0;
+
+        while (!min.isEmpty()) {
+            sorted[index++] = min.poll();
+        }
+        return sorted;
     }
 
 }
