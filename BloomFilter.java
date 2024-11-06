@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Ramiz Hammed/ 002
  *
  *   Note, additional comments provided throughout source code is
  *   for educational purposes.
